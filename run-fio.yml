@@ -1,0 +1,22 @@
+---
+ - name: Connecting to Ovirt
+   hosts: all
+   remote_user: root
+   become: true
+
+   vars_files:
+     - group_vars/all-rhhi-perf
+   pre_tasks:
+     - name: Obtain SSO token
+       ovirt_auth:
+         url: "{{engine_fqdn}}"
+         insecure: yes
+         username: "{{engine_user}}"
+         password: "{{engine_password}}"
+       run_once: true
+       tags:
+         - always
+         - test_ovirt_auth
+
+   roles:
+     - fio_tools
