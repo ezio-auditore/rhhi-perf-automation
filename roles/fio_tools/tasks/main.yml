@@ -192,7 +192,7 @@
   become: false
   shell: |
     /bin/sh ./run_workload.sh -j ./randrw7030.job -t {{gluster_vol_profiling}} -r 120 -q 8 -f ./run_workload.yml -o ./results{{results_suffix}}/fio_results/
-  when: "'perf_test_type' == 'randrw7030'"
+  when: {{perf_test_type}} == "randrw7030"
   tags:
     - fio_tools
     - run_fio
@@ -203,7 +203,7 @@
   become: false
   shell: |
     /bin/sh ./run_workload.sh -j ./randr100.job -t {{gluster_vol_profiling}} -r 120 -q 8 -f ./run_workload.yml -o ./results{{results_suffix}}/fio_results/
-  when: "'perf_test_type' == 'randr100'"
+  when: {{perf_test_type}} ==  "randr100"
   tags:
     - fio_tools
     - run_fio
