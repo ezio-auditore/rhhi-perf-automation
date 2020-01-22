@@ -56,8 +56,6 @@ results_suffix: -rhgs3.5-rhv-4.3-fio-vmstore-fuse-threads-8-9-vm-cache-invalidat
 # FIO specifics
 total_no_of_vms_fio_per_host:
   - 1
-  - 2
-  - 3
 vm_name_prefix: fio
 fio_randrw_70_30_folder: /perf1/iotest
 fio_randrw_70_30_disk_size: 6G
@@ -72,3 +70,5 @@ fio_randrw_70_30_disk_attached_name: fio_tools
 fio_job_name: /root/fio-tools/controller/randrw7030.job
 output_file: test.json
 
+fio_randr_100_folder: /perf1/iotest
+fio_randr_100_disk_size: 4g
