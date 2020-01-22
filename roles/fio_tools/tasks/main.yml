@@ -123,7 +123,7 @@
   delegate_to: 127.0.0.1
   become: false
   template:
-    src: randr100.yml.j2
+    src: randr100_100iops.yml.j2
     dest: randr100.job
     force: yes
   tags:
