@@ -118,6 +118,18 @@
     - generate_randrw7030_yml
     - fio_tools
 
+- name: Generate randr100.yml
+  run_once: true
+  delegate_to: 127.0.0.1
+  become: false
+  template:
+    src: randr100.yml.j2
+    dest: randr100.job
+    force: yes
+  tags:
+    - generate_randr100_yml
+    - fio_tools
+
 - name: Setup  stats collection folder
   file:
     path: "{{ item }}"
@@ -174,12 +186,24 @@
     - fio_tools
 
 
-- name: Run fio test
+- name: Run fio test (randrw7030)
   delegate_to: 127.0.0.1
   run_once: true
   become: false
   shell: |
     /bin/sh ./run_workload.sh -j ./randrw7030.job -t {{gluster_vol_profiling}} -r 120 -q 8 -f ./run_workload.yml -o ./results{{results_suffix}}/fio_results/
+  when: "'perf_test_type' == 'randrw7030'"
+  tags:
+    - fio_tools
+    - run_fio
+
+- name: Run fio test (randr100)
+  delegate_to: 127.0.0.1
+  run_once: true
+  become: false
+  shell: |
+    /bin/sh ./run_workload.sh -j ./randr100.job -t {{gluster_vol_profiling}} -r 120 -q 8 -f ./run_workload.yml -o ./results{{results_suffix}}/fio_results/
+  when: "'perf_test_type' == 'randr100'"
   tags:
     - fio_tools
     - run_fio

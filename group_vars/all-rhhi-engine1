@@ -65,3 +65,6 @@ fio_randrw_70_30_vm_disk_interface: virtio_scsi
 fio_randrw_70_30_disk_format: cow
 fio_randrw_70_30_vm_disk_size: 16Gib
 fio_randrw_70_30_disk_attached_name: fio_tools
+
+fio_randr_100_folder: /perf1/iotest
+fio_randr_100_disk_size: 4g
