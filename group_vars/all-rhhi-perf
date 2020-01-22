@@ -1,6 +1,6 @@
 
 # Engine specifics
-engine_fqdn: https://rhhi-engine.perf.redhat.com/ovirt-engine/api
+engine_fqdn: https://rhhi-perf.lab.eng.blr.redhat.com/ovirt-engine/api
 engine_user: admin@internal
 engine_password: redhat123
 
@@ -8,7 +8,7 @@ engine_password: redhat123
 qcow_url: https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2
 #qcow_url: https://templates.ovirt.org/repo/el7.6-base-4.xz
 template_cluster: Default
-template_name: centos76
+template_name: centos-fio
 template_memory: 4GiB
 template_cpu: 2
 template_disk_size: 10GiB
@@ -24,7 +24,7 @@ vm_disk_name: sysbench-test-disk
 disk_name: /dev/sda
 disk_size: 80GiB
 disk_format: cow
-vm_disk_storage_domain: data
+vm_disk_storage_domain: vmstore
 vm_disk_interface: virtio_scsi
 
 #Profiling Server stats folder specifics
@@ -33,35 +33,42 @@ host_folders:
   - /home/root/rhhi-test-automation
   - /home/root/rhhi-test-automation/fio_results/hypervisor_stats-{{inventory_hostname}}
   - /home/root/rhhi-test-automation/fio_results/gprofile_stats
-  - /home/root/rhhi-test-automation/sysbench-results/hypervisor_stats-{{inventory_hostname}}
-  - /home/root/rhhi-test-automation/sysbench-results/gprofile_stats
+#  - /home/root/rhhi-test-automation/sysbench-results/hypervisor_stats-{{inventory_hostname}}
+#  - /home/root/rhhi-test-automation/sysbench-results/gprofile_stats
+  - /home/root/rhhi-test-automation/fio_results/gprofile_stats/
 
 vm_folders:
   - /home/root/rhhi-test-automation
   - /home/root/rhhi-test-automation/extras
-  - /home/root/rhhi-test-automation/sysbench-results
+#  - /home/root/rhhi-test-automation/sysbench-results
 
 #SYSbench specifics
 mysql_root_password: pass@123
-sysbench_table_size: 10
-sysbench_number_of_table: 5
+sysbench_table_size: 5000000
+sysbench_number_of_table: 16
 
 #Gluster specifics
-gluster_vol_profiling: data
+gluster_vol_profiling: vmstore
 
 #Local results specifics
-results_suffix: -rhgs3.5-rhv-4.3
+results_suffix: -rhgs3.5-rhv-4.3-fio-vmstore-fuse-threads-8-9-vm-cache-invalidation-false
 
 # FIO specifics
 total_no_of_vms_fio_per_host:
   - 1
-# - 2
+  - 2
+  - 3
 vm_name_prefix: fio
 fio_randrw_70_30_folder: /perf1/iotest
-fio_randrw_70_30_disk_size: 4g
-fio_randrw_70_30_disk_name: /dev/sdc
+fio_randrw_70_30_disk_size: 6G
+fio_randrw_70_30_disk_name: /dev/sda
 fio_randrw_70_30_vm_disk_storage_domain: vmstore
 fio_randrw_70_30_vm_disk_interface: virtio_scsi
 fio_randrw_70_30_disk_format: cow
-fio_randrw_70_30_vm_disk_size: 16Gib
+fio_randrw_70_30_vm_disk_size: 14Gib
 fio_randrw_70_30_disk_attached_name: fio_tools
+
+#vm_ip: 10.70.43.97
+fio_job_name: /root/fio-tools/controller/randrw7030.job
+output_file: test.json
+

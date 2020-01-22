@@ -7,7 +7,7 @@
 - name: Install FIO on vms
   delegate_to: "{{item}}"
   yum:
-    name: /tmp/fio-server.rpm
+    name: fio
     state: present
 
 - name: Copy systemd file
@@ -22,13 +22,24 @@
     enabled: yes
     name: /etc/systemd/fio-server.service
 
+- name: Install firewalld
+  delegate_to: "{{item}}"
+  yum:
+    name: firewalld
+
+- name: Enbale firewalld service
+  delegate_to: "{{item}}"
+  systemd:
+    enabled: yes
+    name: firewalld
+
 - name: Start fio-server.service
   delegate_to: "{{item}}"
   systemd:
     state: started
     name: fio-server.service
 
-- name: Allow firewall for port 5432
+- name: Allow firewall for port 8765
   delegate_to: "{{item}}"
   firewalld:
     port: 8765/tcp

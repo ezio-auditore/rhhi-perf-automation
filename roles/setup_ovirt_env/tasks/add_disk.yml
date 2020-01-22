@@ -11,3 +11,4 @@
     state: attached
     activate: yes
     wait: true
+    activate: yes

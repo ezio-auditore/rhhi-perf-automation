@@ -66,7 +66,7 @@
   vars:
     thread_count: "{{item}}"
   with_items:
-      - [10,20,40,80,120,140]
+      - [16,64,128]
   tags:
     - run_perf_tests
 

@@ -143,10 +143,10 @@ function main {
   build_clients
 
   # fio daemon on every client specified MUST be accessible - if not abort
-  if ! fio_OK ; then
-    echo -e "Run aborted, unable to continue.\n"
-    exit 16
-  fi
+  #if ! fio_OK ; then
+  #  echo -e "Run aborted, unable to continue.\n"
+  #  exit 16
+  #fi
 
   cp -f ${JOBNAME} ${FIO_TEMPFILE}
 

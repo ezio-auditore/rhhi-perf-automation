@@ -6,6 +6,9 @@
      cluster: "{{template_cluster}}"
      name: "{{vm_name_prefix}}-{{vm_name_counter}}"
      host: "{{host_for_vm}}"
+     cloud_init:
+       user_name: "root"
+       root_password: "123456"
      state: running
      wait: true
    register: vm_return
