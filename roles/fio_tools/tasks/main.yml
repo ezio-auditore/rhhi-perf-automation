@@ -157,10 +157,17 @@
   tags:
     - fio_tools
 
+- name: Clear gprofile results
+  run_once: true
+  delegate_to: "{{ groups['profiling_server'][0] }}"
+  shell:  'gluster vol profile {{ gluster_vol_profiling }} info clear'
+  tags:
+    - fio_tools
+
 - name: Save gprofile results
   run_once: true
   delegate_to: "{{ groups['profiling_server'][0] }}"
-  shell:  'gluster vol profile "{{ gluster_vol_profiling }}" info > "{{ results_root_folder }}"/fio_results/gprofile_stats/gprofile."{{ step }}".txt'
+  shell: 'gluster vol profile {{ gluster_vol_profiling }} info > {{ results_root_folder }}/fio_results/gprofile_stats/gprofile.{{ step }}.txt' 
   vars:
     step: pre_fio
   tags:

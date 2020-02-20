@@ -4,6 +4,6 @@ hosts:
   - {{host}}
 {% endfor %}
 clients:
-{% for client in hostvars[groups['profiling_server'][0]]['vm_ips'] %}
+{% for client in vm_ips %}
   - {{client}}
 {% endfor %}

@@ -1,9 +1,4 @@
 ---
-- name: copy fio rpm
-  delegate_to: 127.0.0.1
-  become: false
-  shell: " scp ./extras/fio-2.1.7-1.el7.rf.x86_64.rpm root@{{item}}:/tmp/fio-server.rpm"
-
 - name: Install FIO on vms
   delegate_to: "{{item}}"
   yum:

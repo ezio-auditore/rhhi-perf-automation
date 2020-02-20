@@ -20,8 +20,8 @@
 
    roles:
      - setup_ovirt_env
-     - setup_vm_env
-     - run_perf_tests
-     - gather_all_results
+#     - setup_vm_env
+#     - run_perf_tests
+#     - gather_all_results
 #     - fio_tools
 #     - parse_and_upload
